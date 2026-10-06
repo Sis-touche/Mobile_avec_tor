@@ -1,0 +1,24 @@
+<!--
+  Extraits à fusionner dans android/app/src/main/AndroidManifest.xml du
+  projet généré par `flutter create` (voir SETUP.md). Ne remplace pas le
+  fichier : ajoute ces éléments aux emplacements indiqués.
+-->
+
+<!-- 1) Juste avant la balise <application ...> : -->
+<uses-permission android:name="android.permission.INTERNET" />
+
+<!--
+  2) À l'intérieur de la balise <activity android:name=".MainActivity" ...>,
+     après les <intent-filter> déjà présents (LAUNCHER) :
+-->
+<intent-filter>
+    <action android:name="android.intent.action.VIEW" />
+    <category android:name="android.intent.category.DEFAULT" />
+    <category android:name="android.intent.category.BROWSABLE" />
+    <data android:scheme="content" android:mimeType="application/epub+zip" />
+</intent-filter>
+<intent-filter>
+    <action android:name="android.intent.action.VIEW" />
+    <category android:name="android.intent.category.DEFAULT" />
+    <data android:scheme="file" android:mimeType="*/*" android:pathPattern=".*\\.epub" />
+</intent-filter>

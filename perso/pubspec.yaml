@@ -1,0 +1,65 @@
+name: url_reader
+description: >
+  Application de lecture d'URLs privée, avec sauvegarde de liens en local,
+  lecteur epub, et navigation optionnelle via le proxy Tor local d'Orbot pour
+  masquer le domaine visité aux autres appareils du réseau WiFi.
+publish_to: 'none'
+version: 0.1.0+1
+
+environment:
+  sdk: '>=3.3.0 <4.0.0'
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+  # --- State management -----------------------------------------------
+  flutter_riverpod: ^2.5.1
+
+  # --- Navigation --------------------------------------------------------
+  go_router: ^14.2.0
+
+  # --- Base de données locale --------------------------------------------
+  drift: ^2.19.0
+  sqlite3_flutter_libs: ^0.5.24
+  path_provider: ^2.1.3
+  path: ^1.9.0
+
+  # --- WebView avec contrôle du proxy -------------------------------------
+  flutter_inappwebview: ^6.1.5
+
+  # --- Tor : PAS embarqué. Cette app se connecte au proxy local exposé par
+  #     Orbot (app officielle du Tor Project, installée séparément par
+  #     l'utilisateur) — voir docs/orbot_setup.md. Voir docs/notes_readme.md
+  #     pour l'historique : le README d'origine prévoyait un Tor embarqué via
+  #     `flutter_tor`/`tor`, abandonné après un bug de cross-compilation
+  #     Windows→Android non résolu en amont (openssl-sys / Cargokit).
+  url_launcher: ^6.3.0
+  shared_preferences: ^2.3.2
+
+  # --- Client HTTP hors WebView (vérification manuelle de l'IP de sortie) -
+  dio: ^5.5.0
+  socks5_proxy: ^1.0.6
+
+  # --- Epub ----------------------------------------------------------------
+  epubx: ^4.0.0
+  # epubx impose image ^3.0.8 (voir conflit résolu manuellement — ne pas
+  # remonter en 4.x sans vérifier la contrainte d'epubx d'abord).
+  image: ^3.3.0
+
+  # --- Utilitaires -----------------------------------------------------
+  equatable: ^2.0.5
+  file_picker: ^8.0.6
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^4.0.0
+
+  build_runner: ^2.4.11
+  drift_dev: ^2.19.0
+
+  mocktail: ^1.0.3
+
+flutter:
+  uses-material-design: true
